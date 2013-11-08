@@ -15,6 +15,16 @@
     this.vertexSize = 0;
   };
 
+  ctor.WINDING_ODD = 0;
+  ctor.WINDING_NONZERO = 1;
+  ctor.WINDING_POSITIVE = 2;
+  ctor.WINDING_NEGATIVE = 3;
+  ctor.WINDING_ABS_GEQ_TWO = 4;
+
+  ctor.ELEMENT_POLYGONS = 0;
+  ctor.ELEMENT_CONNECTED_POLYGONS = 1;
+  ctor.ELEMENT_BOUNDARY_CONTOURS = 2;
+
   ctor.prototype = {
     newTess: function(mem) {
       this.tess = _newTess(mem || 1024 * 1024);

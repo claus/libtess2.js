@@ -74,24 +74,3 @@ int getElementCount(TESStess *t) {
 const TESSindex* getElements(TESStess *t) {
 	return tessGetElements(t->tess);
 }
-
-/*
-int main(void) {
-
-	float verts[8];
-	verts[0] = 0;   verts[1] = 0;
-	verts[2] = 100; verts[3] = 0;
-	verts[4] = 100; verts[5] = 100;
-	verts[6] = 0;   verts[7] = 100;
-
-	TESStess* t = newTess(1024*512);
-
-	if (t) {
-		addContour(t, 2, verts, sizeof(float) * 2, 4);
-		tesselate(t, TESS_WINDING_POSITIVE, TESS_POLYGONS, 3, 2, 0);
-		printf("[results] verts:%d, elems:%d\n", getVertexCount(t), getElementCount(t));
-		deleteTess(t);
-	}
-
-}
-*/
