@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "libtess2/Include/tesselator.h"
-#include "tesselator.h"
+#include "libtess2.h"
 
 
 void* poolAlloc(void* userData, unsigned int size) {
