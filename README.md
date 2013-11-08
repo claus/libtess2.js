@@ -14,3 +14,25 @@ The code is released under [SGI FREE SOFTWARE LICENSE B Version 2.0](http://oss.
 
 The original author is [Mikko Mononen](mailto:memon@inside.org).
 
+## Getting started
+
+First, include the library:
+
+```js
+<script src="libtess2.js"></script>
+```
+
+That's it, you're now ready to use libtess2. A simple example:
+
+```js
+var vertices = new Float32Array([0,0,  100,0,  100,100,  0,100]);
+console.log("in vertices", vertices);
+
+var tess = new TESS();
+tess.newTess(1024 * 512);
+tess.addContour(vertices, 2, 8, 4);
+tess.tesselate(TESS.WINDING_ODD, TESS.ELEMENT_POLYGONS, 3, 2, null);
+console.log("out vertices", tess.getVertices());
+console.log("out elements", tess.getElements());
+tess.deleteTess();
+```
