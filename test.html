@@ -3,46 +3,19 @@
   <head>
     <meta charset="utf-8">
     <title>libtess2 Tesselator</title>
-    <script src="tesselator.js"></script>
+    <script src="libtess2.js"></script>
     <script>
 
-      var newTess = Module.cwrap('newTess', 'number', ['number']);
-      var deleteTess = Module.cwrap('deleteTess', null, ['number']);
-      var addContour = Module.cwrap('addContour', null, ['number', 'number', 'number', 'number', 'number']);
-      var tesselate = Module.cwrap('tesselate', 'number', ['number', 'number', 'number', 'number', 'number', 'number']);
-      var getVertexCount = Module.cwrap('getVertexCount', 'number', ['number']);
-      var getVertices = Module.cwrap('getVertices', 'number', ['number']);
-      var getVertexIndices = Module.cwrap('getVertexIndices', 'number', ['number']);
-      var getElementCount = Module.cwrap('getElementCount', 'number', ['number']);
-      var getElements = Module.cwrap('getElements', 'number', ['number']);
+      var vertices = new Float32Array([0,0,  100,0,  100,100,  0,100]);
+      console.log("in vertices", vertices);
 
-      var t = newTess(1024 * 512);
-
-      var vertices = new Float32Array([0, 0,  100, 0,  100, 100,  0, 100]);
-      console.log("in vertices", vertices)
-
-      var vertexBuffer = Module._malloc(vertices.length << 2);
-      Module.HEAPF32.set(vertices, vertexBuffer >> 2);
-      addContour(t, 2, vertexBuffer, 8, 4);
-      Module._free(vertexBuffer);
-
-      var ret = tesselate(t, 2, 0, 3, 2, 0);
-
-      var vertexCount = getVertexCount(t);
-      var elementCount = getElementCount(t);
-      console.log("vertexCount", vertexCount);
-      console.log("elementCount", elementCount);
-
-      var pVertices = getVertices(t) >> 2;
-      var pElements = getElements(t) >> 2;
-
-      var tesselatedVertices = new Float32Array(Module.HEAPF32.subarray(pVertices, pVertices + (vertexCount * 2)));
-      var tesselatedElements = new Int32Array(Module.HEAP32.subarray(pElements, pElements + (elementCount * 3)));
-
-      console.log("out vertices", tesselatedVertices)
-      console.log("out elements", tesselatedElements)
-
-      deleteTess(t);
+      var tess = new TESS();
+      tess.newTess(1024 * 512);
+      tess.addContour(vertices, 2, 8, 4);
+      tess.tesselate(2, 0, 3, 2, null);
+      console.log("out vertices", tess.getVertices());
+      console.log("out elements", tess.getElements());
+      tess.deleteTess();
 
     </script>
   </head>

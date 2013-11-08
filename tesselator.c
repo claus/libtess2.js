@@ -36,7 +36,6 @@ TESStess* newTess(int size) {
 		deleteTess(t);
 		return NULL;
 	}
-	printf("newTess\n");
 	return t;
 }
 
@@ -46,7 +45,6 @@ void deleteTess(TESStess* t) {
 	free(t->pool->buf);
 	free(t->pool);
 	free(t);
-	printf("deleteTess\n");
 }
 
 void addContour(TESStess* t, int size, const void* pointer, int stride, int count) {

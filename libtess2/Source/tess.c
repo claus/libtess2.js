@@ -786,8 +786,6 @@ void OutputContours( TESStesselator *tess, TESSmesh *mesh, int vertexSize )
 void tessAddContour( TESStesselator *tess, int size, const void* vertices,
 					int stride, int numVertices )
 {
-	printf("tessAddContour %d %p %d %d\n", size, vertices, stride, numVertices);
-
 	const unsigned char *src = (const unsigned char*)vertices;
 	TESShalfEdge *e;
 	int i;
@@ -809,7 +807,6 @@ void tessAddContour( TESStesselator *tess, int size, const void* vertices,
 	for( i = 0; i < numVertices; ++i )
 	{
 		const TESSreal* coords = (const TESSreal*)src;
-		printf("vert %f %f\n", coords[0], coords[1]);
 		src += stride;
 
 		if( e == NULL ) {
