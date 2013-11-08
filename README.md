@@ -18,7 +18,7 @@ The original author is [Mikko Mononen](mailto:memon@inside.org).
 
 First, include the library:
 
-```js
+```html
 <script src="libtess2.js"></script>
 ```
 
