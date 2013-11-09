@@ -27,24 +27,37 @@
 
   ctor.prototype = {
     newTess: function(mem) {
-      this.tess = _newTess(mem || 1024 * 1024);
+      this.tess = _newTess(mem || 1024 * 1024) || null;
       this.polySize = 0;
       this.vertexSize = 0;
     },
     deleteTess: function() {
-      _deleteTess(this.tess);
-      this.tess = null;
+      if (this.tess !== null) {
+        _deleteTess(this.tess);
+        this.tess = null;
+      } else {
+        throw "deleteTess: Tesselator not initialized.";
+      }
     },
     addContour: function(vertices, size, stride, count) {
-      var buf = Module._malloc(vertices.length << 2);
-      Module.HEAPF32.set(vertices, buf >> 2);
-      _addContour(this.tess, size, buf, stride, count);
-      Module._free(buf); // TODO: can we free the buffer here?
+      if (this.tess !== null) {
+        var pbuf = Module._malloc(vertices.length << 2);
+        Module.HEAPF32.set(vertices, pbuf >> 2);
+        _addContour(this.tess, size, pbuf, stride, count);
+        Module._free(pbuf);
+      } else {
+        throw "addContour: Tesselator not initialized.";
+      }
     },
     tesselate: function(windingRule, elementType, polySize, vertexSize, normal) {
-      this.polySize = polySize;
-      this.vertexSize = vertexSize;
-      return _tesselate(this.tess, windingRule, elementType, polySize, vertexSize, normal);
+      if (this.tess !== null) {
+        normal = normal || 0;
+        this.polySize = polySize;
+        this.vertexSize = vertexSize;
+        return _tesselate(this.tess, windingRule, elementType, polySize, vertexSize, normal);
+      } else {
+        throw "tesselate: Tesselator not initialized.";
+      }
     },
     getVertexCount: function() {
       return _getVertexCount(this.tess);
