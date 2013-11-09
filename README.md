@@ -45,8 +45,6 @@ The JS API is kept close to the original C API.
 newTess(size)
 ```
 Creates a new tesselator.
-
-Parameters:
 * size - The memory, in bytes, to allocate.
 
 ```js
@@ -58,8 +56,6 @@ Deletes a tesselator.
 addContour(vertices, size, stride, count)
 ```
 Adds a contour to be tesselated.
-
-Parameters:
 * vertices - A Float32Array containing the vertices of the contour to add.
 * size - The number of coordinates per vertex. Must be 2 or 3.
 * stride - The offset in bytes between consecutive vertices.
@@ -69,8 +65,6 @@ Parameters:
 tesselate(windingRule, elementType, polySize, vertexSize, normal)
 ```
 Tesselates the contours.
-
-Parameters:
 * windingRule - The winding rule used for tesselation.
   * TESS.WINDING_ODD
   * TESS.WINDING_NONZERO
@@ -85,7 +79,7 @@ Parameters:
 * vertexSize - The number of coordinates in tesselation result vertex, must be 2 or 3.
 * normal - The normal of the input contours (optional).
 
-Returns: 1 (success) or 0 (error)
+Returns 1 (success) or 0 (error)
 
 ```js
 getVertexCount()
@@ -115,4 +109,3 @@ Returns the number of elements in the tesselated output.
 getElements()
 ```
 Returns a Int32Array containig the element indices.
-
