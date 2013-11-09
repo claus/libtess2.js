@@ -25,7 +25,7 @@ First, include the library:
 That's it, you're now ready to use libtess2. A simple example:
 
 ```js
-var vertices = new Float32Array([0,0,  100,0,  100,100,  0,100]);
+var vertices = new Float32Array([0,0, 100,0, 100,100, 0,100]);
 console.log("in vertices", vertices);
 
 var tess = new TESS();
@@ -36,3 +36,75 @@ console.log("out vertices", tess.getVertices());
 console.log("out elements", tess.getElements());
 tess.deleteTess();
 ```
+
+## API
+
+The JS API is kept close to the original C API.
+
+```js
+newTess(size)
+```
+Creates a new tesselator.
+
+Parameters:
+* size - The memory, in bytes, to allocate.
+
+```js
+deleteTess(size)
+```
+Deletes a tesselator.
+
+```js
+addContour(vertices, size, stride, count)
+```
+Adds a contour to be tesselated.
+
+Parameters:
+* vertices - A Float32Array containing the vertices of the contour to add.
+* size - The number of coordinates per vertex. Must be 2 or 3.
+* stride - The offset in bytes between consecutive vertices.
+* count - The number of vertices in the contour.
+
+```js
+tesselate(windingRule, elementType, polySize, vertexSize, normal)
+```
+Tesselates the contours.
+
+Parameters:
+* windingRule - The winding rule used for tesselation.
+* elementType - The tesselation result element type.
+* polySize - The maximum number of vertices per polygons if the output is polygons.
+* vertexSize - The number of coordinates in tesselation result vertex, must be 2 or 3.
+* normal - The normal of the input contours (optional).
+
+Returns: 1 (success) or 0 (error)
+
+```js
+getVertexCount()
+```
+Returns the number of vertices in the tesselated output.
+
+```js
+getVertices()
+```
+Returns a Float32Array containig the vertices.
+
+```js
+getVertexIndices()
+```
+Returns a Int32Array containig the vertex indices.
+
+Vertex indices can be used to map the generated vertices to the original vertices.
+Every point added using addContour() will get a new index starting at 0.
+New vertices generated at the intersections of segments are assigned value 0.
+
+```js
+getElementCount()
+```
+Returns the number of elements in the tesselated output.
+
+```js
+getElements()
+```
+Returns a Int32Array containig the element indices.
+
