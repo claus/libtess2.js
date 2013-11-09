@@ -50,7 +50,7 @@ Parameters:
 * size - The memory, in bytes, to allocate.
 
 ```js
-deleteTess(size)
+deleteTess()
 ```
 Deletes a tesselator.
 
@@ -72,7 +72,15 @@ Tesselates the contours.
 
 Parameters:
 * windingRule - The winding rule used for tesselation.
+  * TESS.WINDING_ODD
+  * TESS.WINDING_NONZERO
+  * TESS.WINDING_POSITIVE
+  * TESS.WINDING_NEGATIVE
+  * TESS.WINDING_ABS_GEQ_TWO
 * elementType - The tesselation result element type.
+  * TESS.ELEMENT_POLYGONS
+  * TESS.ELEMENT_CONNECTED_POLYGONS
+  * TESS.ELEMENT_BOUNDARY_CONTOURS
 * polySize - The maximum number of vertices per polygons if the output is polygons.
 * vertexSize - The number of coordinates in tesselation result vertex, must be 2 or 3.
 * normal - The normal of the input contours (optional).
