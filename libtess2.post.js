@@ -63,15 +63,19 @@
       return _getVertexCount(this.tess);
     },
     getVertices: function() {
-      var pverts = _getVertices(this.tess) >> 2;
-      return new Float32Array(Module.HEAPF32.subarray(pverts, pverts + (this.getVertexCount() * this.vertexSize)));
+      var p = _getVertices(this.tess) >> 2;
+      return new Float32Array(Module.HEAPF32.subarray(p, p + (this.getVertexCount() * this.vertexSize)));
+    },
+    getVertexIndices: function() {
+      var p = _getVertexIndices(this.tess) >> 2;
+      return new Int32Array(Module.HEAP32.subarray(p, p + this.getVertexCount()));
     },
     getElementCount: function() {
       return _getElementCount(this.tess);
     },
     getElements: function() {
-      var pelems = _getElements(this.tess) >> 2;
-      return new Int32Array(Module.HEAP32.subarray(pelems, pelems + (this.getElementCount() * this.polySize)));
+      var p = _getElements(this.tess) >> 2;
+      return new Int32Array(Module.HEAP32.subarray(p, p + (this.getElementCount() * this.polySize)));
     }
   };
 

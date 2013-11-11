@@ -35,6 +35,7 @@ tess.newTess(1024 * 512);
 tess.addContour(vertices, 2, 8, 4);
 tess.tesselate(TESS.WINDING_ODD, TESS.ELEMENT_POLYGONS, 3, 2, null);
 console.log("out vertices", tess.getVertices());
+console.log("out indices", tess.getVertexIndices());
 console.log("out elements", tess.getElements());
 tess.deleteTess();
 ```
